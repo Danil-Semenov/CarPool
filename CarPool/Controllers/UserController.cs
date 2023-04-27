@@ -5,6 +5,7 @@ using Applications.DTOs;
 using Swashbuckle.Swagger;
 using Swashbuckle.AspNetCore.Annotations;
 using CarPool.Filters;
+using Applications.Interface;
 
 namespace CarPool.Controllers
 {
@@ -13,6 +14,12 @@ namespace CarPool.Controllers
     [BasicAuth]
     public class UserController : ControllerBase
     {
+        private readonly IUserRequestService _userRequestService;
+        public UserController(IUserRequestService userRequestService)
+        {
+            _userRequestService = userRequestService;
+        }
+
         [HttpPost("create")]
         [Consumes("application/json")]
         [Produces("application/json")]
@@ -23,8 +30,8 @@ namespace CarPool.Controllers
         {
             try
             {
-               // var result = await _userRequestService.CreateProfileAsync(profile);
-                return Ok(/*new { result = result }*/);
+                var result = await _userRequestService.CreateProfileAsync(profile);
+                return Ok(new { result = result });
             }
             catch (Exception ex)
             {
@@ -42,14 +49,11 @@ namespace CarPool.Controllers
         {
             try
             {
-                //var result = await _userRequestService.EditProfileAsync(profile, id);
-                return Ok(/*new { result = result }*/);
+                var result = await _userRequestService.EditProfileAsync(profile, id);
+                return Ok(new { result = result });
             }
             catch (Exception ex)
             {
-                //Request.Body.Position = 0;
-                //var rawRequestBody = await new StreamReader(Request.Body).ReadToEndAsync();
-                //await _requestService.SetLogAsync(Request.Path.Value, rawRequestBody, ex.Message);
                 return BadRequest(new { status = 400, error = ex.Message });
             }
         }
@@ -58,20 +62,17 @@ namespace CarPool.Controllers
         [Consumes("application/json")]
         [Produces("application/json")]
         [SwaggerOperation(
-            OperationId = nameof(EditProfileAsync),
+            OperationId = nameof(GetRoleByTgLinkAsync),
             Summary = "Получить роль пользователя по профилю ТГ.")]
         public async Task<IActionResult> GetRoleByTgLinkAsync(string tglink)
         {
             try
             {
-                //var result = await _userRequestService.EditProfileAsync(profile, id);
-                return Ok(/*new { result = result }*/);
+                var result = await _userRequestService.GetRoleByTgLinkAsync(tglink);
+                return Ok(new { result = result });
             }
             catch (Exception ex)
             {
-                //Request.Body.Position = 0;
-                //var rawRequestBody = await new StreamReader(Request.Body).ReadToEndAsync();
-                //await _requestService.SetLogAsync(Request.Path.Value, rawRequestBody, ex.Message);
                 return BadRequest(new { status = 400, error = ex.Message });
             }
         }

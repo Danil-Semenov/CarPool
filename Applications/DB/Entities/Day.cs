@@ -15,6 +15,8 @@ namespace Applications.DB.Entities
 
         public int Seats { get; set; }
 
-        public int MetroId { get; set; }
+        public int UserId { get; set; }
+
+        public int DestinationId { get; set; }
     }
 }

@@ -13,7 +13,7 @@ namespace Applications.DB.Shema
     {
         public void Configure(EntityTypeBuilder<Role> builder)
         {
-            builder.ToTable("role", "public");
+            builder.ToTable("roles", "public");
             builder.Property(p => p.Id)
                 .HasColumnName("id")
                 .HasColumnType("SERIAL");

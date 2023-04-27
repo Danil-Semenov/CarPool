@@ -12,6 +12,6 @@ namespace Applications.DB.Entities
 
         public string Name { get; set; }
 
-        public int userId { get; set; }
+        public int UserId { get; set; }
     }
 }

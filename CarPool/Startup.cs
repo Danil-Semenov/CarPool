@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Swashbuckle.Swagger.Annotations;
 using Microsoft.Extensions.Options;
+using Applications.DB;
+using Applications.Interface;
+using Applications.Implementation;
 
 namespace CarPool
 {
@@ -29,6 +33,13 @@ namespace CarPool
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddDbContext<CarPollDbContext>(
+                    options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Transient);
+
+            services.AddScoped<IMappers, Mappers>();
+            services.AddScoped<ITripRequestService, TripRequestService>();
+            services.AddScoped<IUserRequestService, UserRequestService>();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CarPool", Version = "v1" });

@@ -18,7 +18,7 @@ namespace Applications.DB.Shema
                 .HasColumnName("id")
                 .HasColumnType("SERIAL");
             builder.Property(p => p.Name)
-                .HasColumnName("destination")
+                .HasColumnName("description")
                 .HasMaxLength(50)
                 .IsUnicode(false);
 

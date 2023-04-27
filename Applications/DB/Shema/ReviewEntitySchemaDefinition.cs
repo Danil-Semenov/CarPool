@@ -24,8 +24,8 @@ namespace Applications.DB.Shema
                .HasColumnName("user_id")
                .HasColumnType("bigint");
             builder.Property(p => p.Score)
-               .HasColumnName("score_date")
-               .HasColumnType("timestamp");
+               .HasColumnName("scores_id")
+               .HasColumnType("bigint");
 
             builder.HasKey(k => k.Id);
         }

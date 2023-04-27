@@ -59,9 +59,9 @@ namespace CarPool.Controllers
         [Consumes("application/json")]
         [Produces("application/json")]
         [SwaggerOperation(
-            OperationId = nameof(FindTrips),
+            OperationId = nameof(FindTripsAsync),
             Summary = "Найти поездку.")]
-        public async Task<IActionResult> FindTrips(TripDTO trip)
+        public async Task<IActionResult> FindTripsAsync(TripDTO trip)
         {
             try
             {

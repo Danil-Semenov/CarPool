@@ -18,7 +18,7 @@ namespace Applications.DB.Shema
                 .HasColumnName("id")
                 .HasColumnType("SERIAL");
             builder.Property(p => p.RoleId)
-                .HasColumnName("role_Id")
+                .HasColumnName("role_id")
                 .HasColumnType("bigint");
             builder.Property(p => p.FirstName)
                 .HasColumnName("first_name")

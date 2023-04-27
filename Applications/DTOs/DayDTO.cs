@@ -14,6 +14,8 @@ namespace Applications.DTOs
 
         public int Seats { get; set; }
 
-        public MetroDTO Metro { get; set; }
+        public UserDTO User { get; set; }
+
+        public DestinationDTO Destination { get; set; }
     }
 }
