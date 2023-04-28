@@ -11,18 +11,18 @@ namespace Applications.DB.Entities
     {
         public int Id { get; set; }
 
-        public string FirstName { get; set; }
+        public string? FirstName { get; set; }
 
-        public int RoleId { get; set; }
+        public int? RoleId { get; set; }
 
-        public string Phone { get; set; }
+        public string? Phone { get; set; }
 
-        public string TgLink { get; set; }
+        public string? TgLink { get; set; }
 
-        public string Benefits { get; set; }
+        public string? Benefits { get; set; }
 
-        public int Capacity { get; set; }
+        public int? Capacity { get; set; }
 
-        public DateTime RegistrationDate { get; set; }
+        public DateTime? RegistrationDate { get; set; }
     }
 }

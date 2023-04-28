@@ -11,12 +11,12 @@ namespace Applications.DB.Entities
     {
         public int Id { get; set; }
 
-        public DateTime Days { get; set; }
+        public DateTime? Days { get; set; }
 
-        public int Seats { get; set; }
+        public int? Seats { get; set; }
 
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
 
-        public int DestinationId { get; set; }
+        public int? DestinationId { get; set; }
     }
 }

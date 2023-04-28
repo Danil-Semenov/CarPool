@@ -21,7 +21,7 @@ namespace Applications.DB.Shema
                 .HasColumnName("driver_id")
                 .HasColumnType("bigint");
             builder.Property(p => p.Passengers)
-               .HasColumnName("passengers_id")
+               .HasColumnName("passenger_id")
                .HasColumnType("bigint");
             builder.Property(p => p.TripDate)
                .HasColumnName("trip_date")

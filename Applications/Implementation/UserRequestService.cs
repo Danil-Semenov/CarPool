@@ -44,17 +44,13 @@ namespace Applications.Implementation
         {
             var editProfile = await _context.Users.AsNoTracking().SingleOrDefaultAsync(u => u.Id == id);
             _context.Users.Update(editProfile);
-            var newProfile = new User()
-            {
-                Id = user.Id,
-                FirstName = user.FirstName,
-                Phone = user.Phone,
-                TgLink = user.TgLink,
-                Benefits = user.Benefits,
-                Capacity = user.Capacity,
-                RegistrationDate = user.RegistrationDate,
-                RoleId = user.Role.Id
-            };
+            editProfile.FirstName = user.FirstName;
+            editProfile.Phone = user.Phone;
+            editProfile.TgLink = user.TgLink;
+            editProfile.Benefits = user.Benefits;
+            editProfile.Capacity = user.Capacity;
+            editProfile.RegistrationDate = user.RegistrationDate;
+            editProfile.RoleId = user.Role.Id;
             //_context.Users.Update(editProfile);
             await _context.SaveChangesAsync();
             return true;

@@ -12,7 +12,7 @@ namespace Applications.DTOs
 
         public DateTime Days { get; set; }
 
-        public int Seats { get; set; }
+        public int? Seats { get; set; }
 
         public UserDTO User { get; set; }
 

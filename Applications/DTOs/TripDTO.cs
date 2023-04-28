@@ -14,7 +14,7 @@ namespace Applications.DTOs
 
         public IEnumerable<UserDTO> Passengers { get; set; }
 
-        public DateTime TripDate { get; set; }
+        public DateTime? TripDate { get; set; }
 
         public StatusDTO Status { get; set; }
 

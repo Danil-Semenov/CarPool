@@ -11,14 +11,14 @@ namespace Applications.DB.Entities
     {
         public int Id { get; set; }
 
-        public int Driver { get; set; }
+        public int? Driver { get; set; }
 
-        public int Passengers { get; set; }
+        public int? Passengers { get; set; }
 
-        public DateTime TripDate { get; set; }
+        public DateTime? TripDate { get; set; }
 
-        public int Status { get; set; }
+        public int? Status { get; set; }
 
-        public int Destination { get; set; }
+        public int? Destination { get; set; }
     }
 }

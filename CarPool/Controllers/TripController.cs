@@ -5,6 +5,8 @@ using System;
 using Microsoft.AspNetCore.Http;
 using Swashbuckle.AspNetCore.Annotations;
 using CarPool.Filters;
+using Applications.Interface;
+using Applications.DB.Entities;
 
 namespace CarPool.Controllers
 {
@@ -13,6 +15,12 @@ namespace CarPool.Controllers
     [BasicAuth]
     public class TripController : ControllerBase
     {
+        private readonly ITripRequestService _tripRequestService;
+        public TripController(ITripRequestService tripRequestService)
+        {
+            _tripRequestService = tripRequestService;
+        }
+
         [HttpPost("create")]
         [Consumes("application/json")]
         [Produces("application/json")]
@@ -24,8 +32,8 @@ namespace CarPool.Controllers
         {
             try
             {
-                // var result = await _userRequestService.CreateProfileAsync(profile);
-                return Ok(/*new { result = result }*/);
+                var result = await _tripRequestService.CreateTripAsync(trip);
+                return Ok(new { result = result });
             }
             catch (Exception ex)
             {
@@ -43,8 +51,8 @@ namespace CarPool.Controllers
         {
             try
             {
-                //var result = await _userRequestService.EditProfileAsync(profile, id);
-                return Ok(/*new { result = result }*/);
+                var result = await _tripRequestService.GetTripsByTgLinkAsync(tglink);
+                return Ok(new { result = result });
             }
             catch (Exception ex)
             {
@@ -65,8 +73,8 @@ namespace CarPool.Controllers
         {
             try
             {
-                //var result = await _userRequestService.EditProfileAsync(profile, id);
-                return Ok(/*new { result = result }*/);
+                var result = await _tripRequestService.FindTripsAsync(trip);
+                return Ok(new { result = result });
             }
             catch (Exception ex)
             {
@@ -87,8 +95,8 @@ namespace CarPool.Controllers
         {
             try
             {
-                //var result = await _userRequestService.EditProfileAsync(profile, id);
-                return Ok(/*new { result = result }*/);
+                var result = await _tripRequestService.EditTripAsync(trip,id);
+                return Ok(new { result = result });
             }
             catch (Exception ex)
             {
@@ -109,8 +117,8 @@ namespace CarPool.Controllers
         {
             try
             {
-                //var result = await _userRequestService.EditProfileAsync(profile, id);
-                return Ok(/*new { result = result }*/);
+                var result = await _tripRequestService.AddPassengers(id, passenger);
+                return Ok(new { result = result });
             }
             catch (Exception ex)
             {
@@ -131,8 +139,8 @@ namespace CarPool.Controllers
         {
             try
             {
-                //var result = await _userRequestService.EditProfileAsync(profile, id);
-                return Ok(/*new { result = result }*/);
+                var result = await _tripRequestService.CloseTrip(id);
+                return Ok(new { result = result });
             }
             catch (Exception ex)
             {

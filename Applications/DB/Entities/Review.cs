@@ -11,10 +11,10 @@ namespace Applications.DB.Entities
     {
         public int Id { get; set; }
 
-        public int User { get; set; }
+        public int? User { get; set; }
 
-        public int Score { get; set; }
+        public int? Score { get; set; }
 
-        public int Trip { get; set; }
+        public int? Trip { get; set; }
     }
 }
