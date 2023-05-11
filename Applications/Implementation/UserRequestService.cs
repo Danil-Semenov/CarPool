@@ -62,5 +62,12 @@ namespace Applications.Implementation
             var user = await _mappers.GetUser(profile);
             return user.Role;
         }
+
+        public async Task<UserDTO> GetFirstAsync()
+        {
+            var profile = await _context.Users.AsNoTracking().FirstOrDefaultAsync(u=> u.Id >0);
+            var user = await _mappers.GetUser(profile);
+            return user;
+        }
     }
 }

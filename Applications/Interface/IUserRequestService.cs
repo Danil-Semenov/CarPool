@@ -14,5 +14,7 @@ namespace Applications.Interface
         Task<bool> EditProfileAsync(UserDTO profile, int id);
 
         Task<RoleDTO> GetRoleByTgLinkAsync(string tglink);
+
+        Task<UserDTO> GetFirstAsync();
     }
 }
