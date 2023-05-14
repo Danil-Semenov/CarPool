@@ -17,6 +17,8 @@ using Microsoft.Extensions.Options;
 using Applications.DB;
 using Applications.Interface;
 using Applications.Implementation;
+using System.IO;
+using System.Reflection;
 
 namespace CarPool
 {
@@ -34,7 +36,7 @@ namespace CarPool
         {
             services.AddControllers();
             services.AddDbContext<CarPollDbContext>(
-                    options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Transient);
+                    options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Transient);
 
             services.AddScoped<IMappers, Mappers>();
             services.AddScoped<ITripRequestService, TripRequestService>();
@@ -43,6 +45,9 @@ namespace CarPool
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CarPool", Version = "v1" });
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath, true);
                 c.EnableAnnotations();
                 var basicSecurityScheme = new OpenApiSecurityScheme
                 {

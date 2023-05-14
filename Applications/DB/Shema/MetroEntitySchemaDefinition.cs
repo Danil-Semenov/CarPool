@@ -13,17 +13,17 @@ namespace Applications.DB.Shema
     {
         public void Configure(EntityTypeBuilder<Metro> builder)
         {
-            builder.ToTable("metro", "public");
+            builder.ToTable("metro", "dbo");
             builder.Property(p => p.Id)
                 .HasColumnName("id")
-                .HasColumnType("SERIAL");
+                .HasColumnType("int");
             builder.Property(p => p.Name)
                 .HasColumnName("station")
                 .HasMaxLength(50)
                 .IsUnicode(false);
             builder.Property(p => p.UserId)
                 .HasColumnName("user_id")
-                .HasColumnType("bigint");
+                .HasColumnType("int");
 
             builder.HasKey(k => k.Id);
         }

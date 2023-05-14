@@ -13,22 +13,22 @@ namespace Applications.DB.Shema
     {
         public void Configure(EntityTypeBuilder<Day> builder)
         {
-            builder.ToTable("days", "public");
+            builder.ToTable("days", "dbo");
             builder.Property(p => p.Id)
                 .HasColumnName("id")
-                .HasColumnType("SERIAL");
+                .HasColumnType("int");
             builder.Property(p => p.Days)
                 .HasColumnName("days")
-                .HasColumnType("timestamp");
+                .HasColumnType("DateTime");
             builder.Property(p => p.UserId)
                 .HasColumnName("user_id")
-                .HasColumnType("bigint");
+                .HasColumnType("int");
             builder.Property(p => p.DestinationId)
                 .HasColumnName("destination_id")
-                .HasColumnType("bigint");
+                .HasColumnType("int");
             builder.Property(p => p.Seats)
                 .HasColumnName("seats")
-                .HasColumnType("bigint");
+                .HasColumnType("int");
 
             builder.HasKey(k => k.Id);
         }

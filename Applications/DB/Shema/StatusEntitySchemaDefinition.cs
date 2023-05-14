@@ -13,10 +13,10 @@ namespace Applications.DB.Shema
     {
         public void Configure(EntityTypeBuilder<Status> builder)
         {
-            builder.ToTable("status", "public");
+            builder.ToTable("status", "dbo");
             builder.Property(p => p.Id)
                 .HasColumnName("id")
-                .HasColumnType("SERIAL");
+                .HasColumnType("int");
             builder.Property(p => p.Name)
                 .HasColumnName("description")
                 .HasMaxLength(50)

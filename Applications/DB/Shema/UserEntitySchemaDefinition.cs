@@ -13,13 +13,14 @@ namespace Applications.DB.Shema
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.ToTable("users", "public");
+            builder.ToTable("users", "dbo");
+
             builder.Property(p => p.Id)
                 .HasColumnName("id")
-                .HasColumnType("SERIAL");
+                .HasColumnType("int");
             builder.Property(p => p.RoleId)
                 .HasColumnName("role_id")
-                .HasColumnType("bigint");
+                .HasColumnType("int");
             builder.Property(p => p.FirstName)
                 .HasColumnName("first_name")
                 .HasMaxLength(50)
@@ -38,10 +39,10 @@ namespace Applications.DB.Shema
                 .IsUnicode(false);
             builder.Property(p => p.Capacity)
                 .HasColumnName("capacity")
-                .HasColumnType("bigint");
+                .HasColumnType("int");
             builder.Property(p => p.RegistrationDate)
                 .HasColumnName("registration_date")
-                .HasColumnType("timestamp");
+                .HasColumnType("DateTime");
 
             builder.HasKey(k => k.Id);
         }

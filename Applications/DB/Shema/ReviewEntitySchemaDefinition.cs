@@ -13,19 +13,19 @@ namespace Applications.DB.Shema
     {
         public void Configure(EntityTypeBuilder<Review> builder)
         {
-            builder.ToTable("review", "public");
+            builder.ToTable("review", "dbo");
             builder.Property(p => p.Id)
                 .HasColumnName("id")
-                .HasColumnType("SERIAL");
+                .HasColumnType("int");
             builder.Property(p => p.Trip)
                 .HasColumnName("trip_id")
-                .HasColumnType("bigint");
+                .HasColumnType("int");
             builder.Property(p => p.User)
                .HasColumnName("user_id")
-               .HasColumnType("bigint");
+               .HasColumnType("int");
             builder.Property(p => p.Score)
                .HasColumnName("scores_id")
-               .HasColumnType("bigint");
+               .HasColumnType("int");
 
             builder.HasKey(k => k.Id);
         }

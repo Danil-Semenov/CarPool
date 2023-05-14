@@ -13,25 +13,25 @@ namespace Applications.DB.Shema
     {
         public void Configure(EntityTypeBuilder<Trip> builder)
         {
-            builder.ToTable("trip", "public");
+            builder.ToTable("trip", "dbo");
             builder.Property(p => p.Id)
                 .HasColumnName("id")
-                .HasColumnType("SERIAL");
+                .HasColumnType("int");
             builder.Property(p => p.Driver)
                 .HasColumnName("driver_id")
-                .HasColumnType("bigint");
+                .HasColumnType("int");
             builder.Property(p => p.Passengers)
                .HasColumnName("passenger_id")
-               .HasColumnType("bigint");
+               .HasColumnType("int");
             builder.Property(p => p.TripDate)
                .HasColumnName("trip_date")
-               .HasColumnType("timestamp");
+               .HasColumnType("DateTime");
             builder.Property(p => p.Status)
                .HasColumnName("status_id")
-               .HasColumnType("bigint");
+               .HasColumnType("int");
             builder.Property(p => p.Destination)
                .HasColumnName("destination_id")
-               .HasColumnType("bigint");
+               .HasColumnType("int");
 
             builder.HasKey(k => k.Id);
         }

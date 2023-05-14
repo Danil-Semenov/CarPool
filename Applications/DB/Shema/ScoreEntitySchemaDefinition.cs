@@ -13,17 +13,17 @@ namespace Applications.DB.Shema
     {
         public void Configure(EntityTypeBuilder<Score> builder)
         {
-            builder.ToTable("scores", "public");
+            builder.ToTable("scores", "dbo");
             builder.Property(p => p.Id)
                 .HasColumnName("id")
-                .HasColumnType("SERIAL");
+                .HasColumnType("int");
             builder.Property(p => p.Name)
                 .HasColumnName("description")
                 .HasMaxLength(50)
                 .IsUnicode(false);
             builder.Property(p => p.RoleId)
                 .HasColumnName("role_id")
-                .HasColumnType("bigint");
+                .HasColumnType("int");
 
             builder.HasKey(k => k.Id);
         }
