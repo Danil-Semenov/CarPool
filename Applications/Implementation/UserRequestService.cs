@@ -22,11 +22,10 @@ namespace Applications.Implementation
             _mappers = mappers;
         }
 
-        public async Task<bool> CreateProfileAsync(UserDTO user)
+        public async Task<int> CreateProfileAsync(UserDTO user)
         {
             var newProfile = new User()
             {
-                Id = user.Id,
                 FirstName = user.FirstName,
                 Phone = user.Phone,
                 TgLink = user.TgLink,
@@ -37,7 +36,7 @@ namespace Applications.Implementation
             };
             _context.Users.Add(newProfile);
             await _context.SaveChangesAsync();
-            return true;
+            return newProfile.Id;
         }
 
         public async Task<bool> EditProfileAsync(UserDTO user, int id)
@@ -49,7 +48,6 @@ namespace Applications.Implementation
             editProfile.TgLink = user.TgLink;
             editProfile.Benefits = user.Benefits;
             editProfile.Capacity = user.Capacity;
-            editProfile.RegistrationDate = user.RegistrationDate;
             editProfile.RoleId = user.Role.Id;
             //_context.Users.Update(editProfile);
             await _context.SaveChangesAsync();
@@ -58,7 +56,7 @@ namespace Applications.Implementation
 
         public async Task<RoleDTO> GetRoleByTgLinkAsync(string tglink)
         {
-            var profile = await _context.Users.AsNoTracking().SingleOrDefaultAsync(u => u.TgLink == tglink);
+            var profile = await _context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.TgLink == tglink);
             var user = await _mappers.GetUser(profile);
             return user.Role;
         }

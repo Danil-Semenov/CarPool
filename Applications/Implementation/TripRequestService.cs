@@ -23,37 +23,51 @@ namespace Applications.Implementation
             _mappers = mappers;
         }
 
-        public async Task<bool> AddPassengers(int id, UserDTO passenger)
+        public async Task<bool> AddPassengers(int id, int passengerId)
         {
             var editProfile = await _context.Trips.AsNoTracking().SingleOrDefaultAsync(u => u.Id == id);
             _context.Trips.Update(editProfile);
             if (editProfile != null)
             {
-                editProfile.Passengers = passenger.Id;
+                editProfile.Passengers = passengerId;
                 await _context.SaveChangesAsync();
                 return true;
             }
             return false;
         }
 
-        public async Task<bool> CloseTrip(int id)
+        public async Task<bool> DeletePassengers(int id, int passengerId)
+        {
+            //var editProfile = await _context.Trips.AsNoTracking().SingleOrDefaultAsync(u => u.Id == id);
+            //_context.Trips.Update(editProfile);
+            //if (editProfile != null)
+            //{
+            //    editProfile.Passengers = passengerId;
+            //    await _context.SaveChangesAsync();
+            //    return true;
+            //}
+            return false;
+        }
+
+        public async Task<bool> CloseTrip(int id, int userId)
         {
             var editProfile = await _context.Trips.AsNoTracking().SingleOrDefaultAsync(u => u.Id == id);
+            var user = await _context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Id == userId);
             _context.Trips.Update(editProfile);
-            if (editProfile != null)
+            
+            if (editProfile != null && user != null)
             {
-                editProfile.Status = 2;
+                editProfile.Status = user.RoleId.Value == 1 ? 3:4;
                 await _context.SaveChangesAsync();
                 return true;
             }
             return false;
         }
 
-        public async Task<bool> CreateTripAsync(TripDTO trip)
+        public async Task<int> CreateTripAsync(TripDTO trip)
         {
             var newProfile = new Trip()
             {
-                Id = trip.Id,
                 Driver = trip.Driver.Id,
                 Passengers = trip.Passengers.First().Id,
                 TripDate = trip.TripDate,
@@ -62,7 +76,7 @@ namespace Applications.Implementation
             };
             _context.Trips.Add(newProfile);
             await _context.SaveChangesAsync();
-            return true;
+            return newProfile.Id;
         }
 
         public async Task<bool> EditTripAsync(TripDTO trip, int id)
@@ -90,7 +104,7 @@ namespace Applications.Implementation
 
         public async Task<IEnumerable<TripDTO>> GetTripsByTgLinkAsync(string tglink)
         {
-            var users = await _context.Users.AsNoTracking().SingleOrDefaultAsync(u => u.TgLink == tglink);
+            var users = await _context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.TgLink == tglink);
             if (users != null)
             {
                 var trips = _context.Trips.AsNoTracking().Where(u => u.Passengers == users.Id || u.Driver == users.Id);

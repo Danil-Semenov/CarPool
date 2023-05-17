@@ -9,7 +9,7 @@ namespace Applications.Interface
 {
     public interface ITripRequestService
     {
-        Task<bool> CreateTripAsync(TripDTO trip);
+        Task<int> CreateTripAsync(TripDTO trip);
 
         Task<IEnumerable<TripDTO>> GetTripsByTgLinkAsync(string tglink);
 
@@ -17,8 +17,10 @@ namespace Applications.Interface
 
         Task<bool> EditTripAsync(TripDTO trip, int id);
 
-        Task<bool> AddPassengers(int id, UserDTO passenger);
+        Task<bool> AddPassengers(int id, int passengerId);
 
-        Task<bool> CloseTrip(int id);
+        Task<bool> DeletePassengers(int id, int passengerId);
+
+        Task<bool> CloseTrip(int id, int userId);
     }
 }

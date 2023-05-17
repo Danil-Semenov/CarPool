@@ -107,17 +107,39 @@ namespace CarPool.Controllers
             }
         }
 
-        [HttpPost("{id}/passenger")]
+        [HttpGet("{id}/addpassenger")]
         [Consumes("application/json")]
         [Produces("application/json")]
         [SwaggerOperation(
             OperationId = nameof(AddPassengers),
             Summary = "Добавить пассажира в поездку.")]
-        public async Task<IActionResult> AddPassengers(int id, UserDTO passenger)
+        public async Task<IActionResult> AddPassengers(int id, int passengerId)
         {
             try
             {
-                var result = await _tripRequestService.AddPassengers(id, passenger);
+                var result = await _tripRequestService.AddPassengers(id, passengerId);
+                return Ok(new { result = result });
+            }
+            catch (Exception ex)
+            {
+                //Request.Body.Position = 0;
+                //var rawRequestBody = await new StreamReader(Request.Body).ReadToEndAsync();
+                //await _requestService.SetLogAsync(Request.Path.Value, rawRequestBody, ex.Message);
+                return BadRequest(new { status = 400, error = ex.Message });
+            }
+        }
+
+        [HttpGet("{id}/deletepassenger")]
+        [Consumes("application/json")]
+        [Produces("application/json")]
+        [SwaggerOperation(
+            OperationId = nameof(DeletePassengers),
+            Summary = "Удалить пассажира из поездки.")]
+        public async Task<IActionResult> DeletePassengers(int id, int passengerId)
+        {
+            try
+            {
+                var result = await _tripRequestService.DeletePassengers(id, passengerId);
                 return Ok(new { result = result });
             }
             catch (Exception ex)
@@ -135,11 +157,11 @@ namespace CarPool.Controllers
         [SwaggerOperation(
             OperationId = nameof(CloseTrip),
             Summary = "Завершить поездку.")]
-        public async Task<IActionResult> CloseTrip(int id)
+        public async Task<IActionResult> CloseTrip(int id, int userId)
         {
             try
             {
-                var result = await _tripRequestService.CloseTrip(id);
+                var result = await _tripRequestService.CloseTrip(id, userId);
                 return Ok(new { result = result });
             }
             catch (Exception ex)

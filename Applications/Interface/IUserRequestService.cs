@@ -9,7 +9,7 @@ namespace Applications.Interface
 {
     public interface IUserRequestService
     {
-        Task<bool> CreateProfileAsync(UserDTO profile);
+        Task<int> CreateProfileAsync(UserDTO profile);
 
         Task<bool> EditProfileAsync(UserDTO profile, int id);
 
