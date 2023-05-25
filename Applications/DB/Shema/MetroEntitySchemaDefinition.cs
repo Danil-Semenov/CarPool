@@ -21,9 +21,6 @@ namespace Applications.DB.Shema
                 .HasColumnName("station")
                 .HasMaxLength(50)
                 .IsUnicode(false);
-            builder.Property(p => p.UserId)
-                .HasColumnName("user_id")
-                .HasColumnType("int");
 
             builder.HasKey(k => k.Id);
         }

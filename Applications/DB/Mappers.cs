@@ -58,13 +58,6 @@ namespace Applications.DB
                 Id = metro.Id,
                 Name = metro.Name
             };
-
-            var user = await _context.Users.AsNoTracking().SingleOrDefaultAsync(r => r.Id == metro.UserId);
-            if (user != null)
-            {
-                result.User = await GetUser(user);
-            }
-
             return result;
         }
 
@@ -140,10 +133,13 @@ namespace Applications.DB
             {
                 result.Driver = await GetUser(driver);
             }
-            var passengers = await _context.Users.AsNoTracking().SingleOrDefaultAsync(r => r.Id == trip.Passengers);
+            var passengers = await _context.Users.AsNoTracking().Where(r => r.Id == trip.Passengers1 || r.Id == trip.Passengers2 || r.Id == trip.Passengers3 || r.Id == trip.Passengers4).ToListAsync();
             if (passengers != null)
             {
-                result.Passengers = new List<UserDTO>() { await GetUser(passengers) };
+                var rList = new List<UserDTO>(4);
+                foreach (var pas in passengers)
+                    rList.Add(await GetUser(pas));
+                result.Passengers = rList;
             }
             var status = await _context.Status.AsNoTracking().SingleOrDefaultAsync(r => r.Id == trip.Status);
             if (status != null)
@@ -154,6 +150,18 @@ namespace Applications.DB
             if (destination != null)
             {
                 result.Destination = await GetDestination(destination);
+            }
+
+            var metro = await _context.Metro.AsNoTracking().SingleOrDefaultAsync(r => r.Id == trip.Metro);
+            if (metro != null)
+            {
+                result.Metro = await GetMetro(metro);
+            }
+
+            var day = await _context.Days.AsNoTracking().SingleOrDefaultAsync(r => r.Id == trip.Days);
+            if (day != null)
+            {
+                result.Day = await GetDay(day);
             }
             return result;
         }
@@ -175,7 +183,13 @@ namespace Applications.DB
             if (role != null)
             {
                 result.Role = await GetRole(role);
-            } 
+            }
+
+            var metro = await _context.Metro.AsNoTracking().SingleOrDefaultAsync(r => r.Id == user.MetroId);
+            if (metro != null)
+            {
+                result.Metro = await GetMetro(metro);
+            }
             return result;
         }
     }

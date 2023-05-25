@@ -19,5 +19,9 @@ namespace Applications.DTOs
         public StatusDTO Status { get; set; }
 
         public DestinationDTO Destination { get; set; }
+
+        public MetroDTO Metro { get; set; }
+
+        public DayDTO Day { get; set; }
     }
 }

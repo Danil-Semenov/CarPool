@@ -29,23 +29,69 @@ namespace Applications.Implementation
             _context.Trips.Update(editProfile);
             if (editProfile != null)
             {
-                editProfile.Passengers = passengerId;
-                await _context.SaveChangesAsync();
-                return true;
+                var days = await _context.Days.AsNoTracking().SingleOrDefaultAsync(u => u.Id == editProfile.Days);
+                var plase = days.Seats;
+                if (editProfile.Passengers1 > 0 && plase > 0)
+                {
+                    editProfile.Passengers1 = passengerId;
+                    await _context.SaveChangesAsync();
+                    return true;
+                }
+                if (editProfile.Passengers2 > 0 && plase > 1)
+                {
+                    editProfile.Passengers2 = passengerId;
+                    await _context.SaveChangesAsync();
+                    return true;
+                }
+                if (editProfile.Passengers3 > 0 && plase > 2)
+                {
+                    editProfile.Passengers3 = passengerId;
+                    await _context.SaveChangesAsync();
+                    return true;
+                }
+                if (editProfile.Passengers4 > 0 && plase > 3)
+                {
+                    editProfile.Passengers4 = passengerId;
+                    await _context.SaveChangesAsync();
+                    return true;
+                }
+                return false;
             }
             return false;
         }
 
         public async Task<bool> DeletePassengers(int id, int passengerId)
         {
-            //var editProfile = await _context.Trips.AsNoTracking().SingleOrDefaultAsync(u => u.Id == id);
-            //_context.Trips.Update(editProfile);
-            //if (editProfile != null)
-            //{
-            //    editProfile.Passengers = passengerId;
-            //    await _context.SaveChangesAsync();
-            //    return true;
-            //}
+            var editProfile = await _context.Trips.AsNoTracking().SingleOrDefaultAsync(u => u.Id == id);
+            _context.Trips.Update(editProfile);
+            if (editProfile != null)
+            {
+                if (editProfile.Passengers1 == passengerId)
+                {
+                    editProfile.Passengers1 = 0;
+                    await _context.SaveChangesAsync();
+                    return true;
+                }
+                if (editProfile.Passengers2 == passengerId)
+                {
+                    editProfile.Passengers2 = 0;
+                    await _context.SaveChangesAsync();
+                    return true;
+                }
+                if (editProfile.Passengers3 == passengerId)
+                {
+                    editProfile.Passengers3 = 0;
+                    await _context.SaveChangesAsync();
+                    return true;
+                }
+                if (editProfile.Passengers4 == passengerId)
+                {
+                    editProfile.Passengers4 = 0;
+                    await _context.SaveChangesAsync();
+                    return true;
+                }
+                return false;
+            }
             return false;
         }
 
@@ -69,11 +115,23 @@ namespace Applications.Implementation
             var newProfile = new Trip()
             {
                 Driver = trip.Driver.Id,
-                Passengers = trip.Passengers.First().Id,
-                TripDate = trip.TripDate,
+                //Passengers = trip.Passengers.First().Id,
+                //TripDate = trip.TripDate,
                 Status = trip.Status.Id,
-                Destination = trip.Destination.Id
+                Destination = trip.Destination.Id,
+                //Metro = trip.Metro.Id,
+                Days =  trip.Day.Id,
             };
+
+            var user = await _context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Id == trip.Driver.Id);
+            if(user != null && user.MetroId >0)
+            {
+                newProfile.Metro = user.MetroId;
+            }
+            else
+            {
+                new ArgumentException("Driver.Metro");
+            }
             _context.Trips.Add(newProfile);
             await _context.SaveChangesAsync();
             return newProfile.Id;
@@ -81,16 +139,17 @@ namespace Applications.Implementation
 
         public async Task<bool> EditTripAsync(TripDTO trip, int id)
         {
-
             var editProfile = await _context.Trips.AsNoTracking().SingleOrDefaultAsync(u => u.Id == id);
             _context.Trips.Update(editProfile);
             if (editProfile != null)
             {
                 editProfile.Driver = trip.Driver.Id;
-                editProfile.Passengers = trip.Passengers.First().Id;
+                //editProfile.Passengers = trip.Passengers.First().Id;
                 editProfile.TripDate = trip.TripDate;
                 editProfile.Status = trip.Status.Id;
                 editProfile.Destination = trip.Destination.Id;
+                editProfile.Metro = trip.Metro.Id;
+                editProfile.Days = trip.Day.Id;
                 await _context.SaveChangesAsync();
                 return true;
             }
@@ -107,7 +166,7 @@ namespace Applications.Implementation
             var users = await _context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.TgLink == tglink);
             if (users != null)
             {
-                var trips = _context.Trips.AsNoTracking().Where(u => u.Passengers == users.Id || u.Driver == users.Id);
+                var trips = _context.Trips.AsNoTracking().Where(u => u.Passengers1 == users.Id || u.Driver == users.Id || u.Passengers2 == users.Id || u.Passengers3 == users.Id || u.Passengers4 == users.Id);
                 if (trips != null)
                 {
                     var tripsDTO = new List<TripDTO>();

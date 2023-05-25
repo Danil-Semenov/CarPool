@@ -23,5 +23,7 @@ namespace Applications.DTOs
         public int? Capacity { get; set; }
 
         public DateTime? RegistrationDate { get; set; }
+
+        public MetroDTO Metro { get; set; }
     }
 }

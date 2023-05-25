@@ -32,7 +32,8 @@ namespace Applications.Implementation
                 Benefits = user.Benefits,
                 Capacity = user.Capacity,
                 RegistrationDate = user.RegistrationDate,
-                RoleId = user.Role.Id
+                RoleId = user.Role.Id,
+                MetroId = user.Metro.Id
             };
             _context.Users.Add(newProfile);
             await _context.SaveChangesAsync();
@@ -43,12 +44,20 @@ namespace Applications.Implementation
         {
             var editProfile = await _context.Users.AsNoTracking().SingleOrDefaultAsync(u => u.Id == id);
             _context.Users.Update(editProfile);
-            editProfile.FirstName = user.FirstName;
-            editProfile.Phone = user.Phone;
-            editProfile.TgLink = user.TgLink;
-            editProfile.Benefits = user.Benefits;
-            editProfile.Capacity = user.Capacity;
-            editProfile.RoleId = user.Role.Id;
+            if (!string.IsNullOrEmpty(user.FirstName))
+                editProfile.FirstName = user.FirstName;
+            if (!string.IsNullOrEmpty(user.Phone))
+                editProfile.Phone = user.Phone;
+            if (!string.IsNullOrEmpty(user.TgLink))
+                editProfile.TgLink = user.TgLink;
+            if (!string.IsNullOrEmpty(user.Benefits))
+                editProfile.Benefits = user.Benefits;
+            if (user.Capacity >0 )
+                editProfile.Capacity = user.Capacity;
+            if (user.Role?.Id > 0)
+                editProfile.RoleId = user.Role.Id;
+            if (user.Metro?.Id > 0)
+                editProfile.MetroId = user.Metro.Id;
             //_context.Users.Update(editProfile);
             await _context.SaveChangesAsync();
             return true;

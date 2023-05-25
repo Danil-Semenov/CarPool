@@ -11,7 +11,5 @@ namespace Applications.DTOs
         public int Id { get; set; }
 
         public string Name { get; set; }
-
-        public UserDTO User { get; set; }
     }
 }

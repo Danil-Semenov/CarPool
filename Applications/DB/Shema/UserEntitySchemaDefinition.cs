@@ -43,6 +43,9 @@ namespace Applications.DB.Shema
             builder.Property(p => p.RegistrationDate)
                 .HasColumnName("registration_date")
                 .HasColumnType("DateTime");
+            builder.Property(p => p.MetroId)
+              .HasColumnName("metro_id")
+              .HasColumnType("int");
 
             builder.HasKey(k => k.Id);
         }

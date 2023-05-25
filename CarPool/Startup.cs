@@ -40,7 +40,8 @@ namespace CarPool
 
             services.AddScoped<IMappers, Mappers>();
             services.AddScoped<ITripRequestService, TripRequestService>();
-            services.AddScoped<IUserRequestService, UserRequestService>();
+            services.AddScoped<IUserRequestService, UserRequestService>(); 
+            services.AddScoped<IMetroRequestService, MetroRequestService>();
 
             services.AddSwaggerGen(c =>
             {

@@ -20,8 +20,17 @@ namespace Applications.DB.Shema
             builder.Property(p => p.Driver)
                 .HasColumnName("driver_id")
                 .HasColumnType("int");
-            builder.Property(p => p.Passengers)
-               .HasColumnName("passenger_id")
+            builder.Property(p => p.Passengers1)
+               .HasColumnName("passenger1_id")
+               .HasColumnType("int");
+            builder.Property(p => p.Passengers2)
+               .HasColumnName("passenger2_id")
+               .HasColumnType("int");
+            builder.Property(p => p.Passengers3)
+               .HasColumnName("passenger3_id")
+               .HasColumnType("int");
+            builder.Property(p => p.Passengers4)
+               .HasColumnName("passenger4_id")
                .HasColumnType("int");
             builder.Property(p => p.TripDate)
                .HasColumnName("trip_date")
@@ -32,6 +41,13 @@ namespace Applications.DB.Shema
             builder.Property(p => p.Destination)
                .HasColumnName("destination_id")
                .HasColumnType("int");
+            builder.Property(p => p.Metro)
+              .HasColumnName("metro_id")
+              .HasColumnType("int");
+            builder.Property(p => p.Days)
+              .HasColumnName("days_id")
+              .HasColumnType("int");
+
 
             builder.HasKey(k => k.Id);
         }

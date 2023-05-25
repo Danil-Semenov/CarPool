@@ -24,5 +24,7 @@ namespace Applications.DB.Entities
         public int? Capacity { get; set; }
 
         public DateTime? RegistrationDate { get; set; }
+
+        public int? MetroId { get; set; }
     }
 }
