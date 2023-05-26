@@ -22,7 +22,7 @@ namespace Applications.DB.Shema
                 .HasColumnType("int");
             builder.Property(p => p.User)
                .HasColumnName("user_id")
-               .HasColumnType("int");
+               .HasColumnType("bigint");
             builder.Property(p => p.Score)
                .HasColumnName("scores_id")
                .HasColumnType("int");

@@ -45,7 +45,7 @@ namespace CarPool.Controllers
         [SwaggerOperation(
             OperationId = nameof(EditProfileAsync),
             Summary = "Редактировать пользователя.")]
-        public async Task<IActionResult> EditProfileAsync(UserDTO profile, int id)
+        public async Task<IActionResult> EditProfileAsync(UserDTO profile, long id)
         {
             try
             {
@@ -58,17 +58,17 @@ namespace CarPool.Controllers
             }
         }
 
-        [HttpGet("getrolebytglink")]
+        [HttpGet("getrolebyid")]
         [Consumes("application/json")]
         [Produces("application/json")]
         [SwaggerOperation(
-            OperationId = nameof(GetRoleByTgLinkAsync),
-            Summary = "Получить роль пользователя по профилю ТГ.")]
-        public async Task<IActionResult> GetRoleByTgLinkAsync(string tglink)
+            OperationId = nameof(GetRoleByIdAsync),
+            Summary = "Получить роль пользователя по ID.")]
+        public async Task<IActionResult> GetRoleByIdAsync(long id)
         {
             try
             {
-                var result = await _userRequestService.GetRoleByTgLinkAsync(tglink);
+                var result = await _userRequestService.GetRoleByIdAsync(id);
                 return Ok(new { result = result });
             }
             catch (Exception ex)

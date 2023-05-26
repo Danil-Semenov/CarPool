@@ -41,17 +41,17 @@ namespace CarPool.Controllers
             }
         }
 
-        [HttpGet("gettripsbytglink")]
+        [HttpGet("gettripsbyuserid")]
         [Consumes("application/json")]
         [Produces("application/json")]
         [SwaggerOperation(
-            OperationId = nameof(GetTripsByTgLinkAsync),
-            Summary = "Получение поездок по ссылке на профиль.")]
-        public async Task<IActionResult> GetTripsByTgLinkAsync(string tglink)
+            OperationId = nameof(GetTripsByUserIdAsync),
+            Summary = "Получение поездок по ссылке на Id пользователя.")]
+        public async Task<IActionResult> GetTripsByUserIdAsync(long userId)
         {
             try
             {
-                var result = await _tripRequestService.GetTripsByTgLinkAsync(tglink);
+                var result = await _tripRequestService.GetTripsByUserIdAsync(userId);
                 return Ok(new { result = result });
             }
             catch (Exception ex)
@@ -113,7 +113,7 @@ namespace CarPool.Controllers
         [SwaggerOperation(
             OperationId = nameof(AddPassengers),
             Summary = "Добавить пассажира в поездку.")]
-        public async Task<IActionResult> AddPassengers(int id, int passengerId)
+        public async Task<IActionResult> AddPassengers(int id, long passengerId)
         {
             try
             {
@@ -135,7 +135,7 @@ namespace CarPool.Controllers
         [SwaggerOperation(
             OperationId = nameof(DeletePassengers),
             Summary = "Удалить пассажира из поездки.")]
-        public async Task<IActionResult> DeletePassengers(int id, int passengerId)
+        public async Task<IActionResult> DeletePassengers(int id, long passengerId)
         {
             try
             {
@@ -157,7 +157,7 @@ namespace CarPool.Controllers
         [SwaggerOperation(
             OperationId = nameof(CloseTrip),
             Summary = "Завершить поездку.")]
-        public async Task<IActionResult> CloseTrip(int id, int userId)
+        public async Task<IActionResult> CloseTrip(int id, long userId)
         {
             try
             {

@@ -11,15 +11,15 @@ namespace Applications.DB.Entities
     {
         public int Id { get; set; }
 
-        public int? Driver { get; set; }
+        public long? Driver { get; set; }
 
-        public int? Passengers1 { get; set; }
+        public long? Passengers1 { get; set; }
 
-        public int? Passengers2 { get; set; }
+        public long? Passengers2 { get; set; }
 
-        public int? Passengers3 { get; set; }
+        public long? Passengers3 { get; set; }
 
-        public int? Passengers4 { get; set; }
+        public long? Passengers4 { get; set; }
 
         public DateTime? TripDate { get; set; }
 

@@ -23,7 +23,7 @@ namespace Applications.Implementation
             _mappers = mappers;
         }
 
-        public async Task<bool> AddPassengers(int id, int passengerId)
+        public async Task<bool> AddPassengers(int id, long passengerId)
         {
             var editProfile = await _context.Trips.AsNoTracking().SingleOrDefaultAsync(u => u.Id == id);
             _context.Trips.Update(editProfile);
@@ -60,7 +60,7 @@ namespace Applications.Implementation
             return false;
         }
 
-        public async Task<bool> DeletePassengers(int id, int passengerId)
+        public async Task<bool> DeletePassengers(int id, long passengerId)
         {
             var editProfile = await _context.Trips.AsNoTracking().SingleOrDefaultAsync(u => u.Id == id);
             _context.Trips.Update(editProfile);
@@ -95,7 +95,7 @@ namespace Applications.Implementation
             return false;
         }
 
-        public async Task<bool> CloseTrip(int id, int userId)
+        public async Task<bool> CloseTrip(int id, long userId)
         {
             var editProfile = await _context.Trips.AsNoTracking().SingleOrDefaultAsync(u => u.Id == id);
             var user = await _context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Id == userId);
@@ -161,9 +161,9 @@ namespace Applications.Implementation
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<TripDTO>> GetTripsByTgLinkAsync(string tglink)
+        public async Task<IEnumerable<TripDTO>> GetTripsByUserIdAsync(long userId)
         {
-            var users = await _context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.TgLink == tglink);
+            var users = await _context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Id == userId);
             if (users != null)
             {
                 var trips = _context.Trips.AsNoTracking().Where(u => u.Passengers1 == users.Id || u.Driver == users.Id || u.Passengers2 == users.Id || u.Passengers3 == users.Id || u.Passengers4 == users.Id);

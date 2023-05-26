@@ -19,19 +19,19 @@ namespace Applications.DB.Shema
                 .HasColumnType("int");
             builder.Property(p => p.Driver)
                 .HasColumnName("driver_id")
-                .HasColumnType("int");
+                .HasColumnType("bigint");
             builder.Property(p => p.Passengers1)
                .HasColumnName("passenger1_id")
-               .HasColumnType("int");
+               .HasColumnType("bigint");
             builder.Property(p => p.Passengers2)
                .HasColumnName("passenger2_id")
-               .HasColumnType("int");
+               .HasColumnType("bigint");
             builder.Property(p => p.Passengers3)
                .HasColumnName("passenger3_id")
-               .HasColumnType("int");
+               .HasColumnType("bigint");
             builder.Property(p => p.Passengers4)
                .HasColumnName("passenger4_id")
-               .HasColumnType("int");
+               .HasColumnType("bigint");
             builder.Property(p => p.TripDate)
                .HasColumnName("trip_date")
                .HasColumnType("DateTime");

@@ -17,7 +17,7 @@ namespace Applications.DB.Shema
 
             builder.Property(p => p.Id)
                 .HasColumnName("id")
-                .HasColumnType("int");
+                .HasColumnType("bigint");
             builder.Property(p => p.RoleId)
                 .HasColumnName("role_id")
                 .HasColumnType("int");

@@ -11,7 +11,7 @@ namespace Applications.DB.Entities
     {
         public int Id { get; set; }
 
-        public int? User { get; set; }
+        public long? User { get; set; }
 
         public int? Score { get; set; }
 

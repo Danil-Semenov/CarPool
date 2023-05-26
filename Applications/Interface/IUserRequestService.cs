@@ -9,11 +9,11 @@ namespace Applications.Interface
 {
     public interface IUserRequestService
     {
-        Task<int> CreateProfileAsync(UserDTO profile);
+        Task<long> CreateProfileAsync(UserDTO profile);
 
-        Task<bool> EditProfileAsync(UserDTO profile, int id);
+        Task<bool> EditProfileAsync(UserDTO profile, long id);
 
-        Task<RoleDTO> GetRoleByTgLinkAsync(string tglink);
+        Task<RoleDTO> GetRoleByIdAsync(long id);
 
         Task<UserDTO> GetFirstAsync();
     }

@@ -22,7 +22,7 @@ namespace Applications.DB.Shema
                 .HasColumnType("DateTime");
             builder.Property(p => p.UserId)
                 .HasColumnName("user_id")
-                .HasColumnType("int");
+                .HasColumnType("bigint");
             builder.Property(p => p.DestinationId)
                 .HasColumnName("destination_id")
                 .HasColumnType("int");

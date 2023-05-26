@@ -11,16 +11,16 @@ namespace Applications.Interface
     {
         Task<int> CreateTripAsync(TripDTO trip);
 
-        Task<IEnumerable<TripDTO>> GetTripsByTgLinkAsync(string tglink);
+        Task<IEnumerable<TripDTO>> GetTripsByUserIdAsync(long userId);
 
         Task<IEnumerable<TripDTO>> FindTripsAsync(TripDTO trip);
 
         Task<bool> EditTripAsync(TripDTO trip, int id);
 
-        Task<bool> AddPassengers(int id, int passengerId);
+        Task<bool> AddPassengers(int id, long passengerId);
 
-        Task<bool> DeletePassengers(int id, int passengerId);
+        Task<bool> DeletePassengers(int id, long passengerId);
 
-        Task<bool> CloseTrip(int id, int userId);
+        Task<bool> CloseTrip(int id, long userId);
     }
 }

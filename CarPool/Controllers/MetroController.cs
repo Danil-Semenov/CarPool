@@ -63,7 +63,7 @@ namespace CarPool.Controllers
         [Produces("application/json")]
         [SwaggerOperation(
            OperationId = nameof(GetMetroByNameAsync),
-           Summary = "Получить метро по id.")]
+           Summary = "Получить метро по имени.")]
         public async Task<IActionResult> GetMetroByNameAsync(string name)
         {
             try
