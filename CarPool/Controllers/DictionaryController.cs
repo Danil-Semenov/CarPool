@@ -10,27 +10,27 @@ using Applications.Interface;
 namespace CarPool.Controllers
 {
     [ApiController]
-    [Route("/api/v1/user")]
+    [Route("/api/v1/dictionary")]
     [BasicAuth]
-    public class UserController : ControllerBase
+    public class DictionaryController : ControllerBase
     {
-        private readonly IUserRequestService _userRequestService;
-        public UserController(IUserRequestService userRequestService)
+        private readonly IDictionaryRequestService _dictionaryRequestService;
+        public DictionaryController(IDictionaryRequestService dictionaryRequestService)
         {
-            _userRequestService = userRequestService;
+            _dictionaryRequestService = dictionaryRequestService;
         }
 
-        [HttpPost("add")]
+        [HttpGet("destination")]
         [Consumes("application/json")]
         [Produces("application/json")]
         [SwaggerOperation(
-            OperationId = nameof(CreateProfileAsync),
-            Summary = "Создать пользователя.")]
-        public async Task<IActionResult> CreateProfileAsync(UserDTO profile)
+            OperationId = nameof(GetAllDestinationAsync),
+            Summary = "Получить словарь 'НАПРАВЛЕНИЯ ПОЕЗДКИ'.")]
+        public async Task<IActionResult> GetAllDestinationAsync()
         {
             try
             {
-                var result = await _userRequestService.CreateProfileAsync(profile);
+                var result = await _dictionaryRequestService.GetAllDestinationAsync();
                 return Ok(new { result = result });
             }
             catch (Exception ex)
@@ -39,17 +39,17 @@ namespace CarPool.Controllers
             }
         }
 
-        [HttpPut("{id}")]
+        [HttpGet("role")]
         [Consumes("application/json")]
         [Produces("application/json")]
         [SwaggerOperation(
-            OperationId = nameof(EditProfileAsync),
-            Summary = "Редактировать пользователя.")]
-        public async Task<IActionResult> EditProfileAsync(UserDTO profile, long id)
+             OperationId = nameof(GetAllRoleAsync),
+             Summary = "Получить словарь 'РОЛИ'.")]
+        public async Task<IActionResult> GetAllRoleAsync()
         {
             try
             {
-                var result = await _userRequestService.EditProfileAsync(profile, id);
+                var result = await _dictionaryRequestService.GetAllRoleAsync();
                 return Ok(new { result = result });
             }
             catch (Exception ex)
@@ -58,17 +58,17 @@ namespace CarPool.Controllers
             }
         }
 
-        [HttpGet("getrolebyid")]
+        [HttpGet("status")]
         [Consumes("application/json")]
         [Produces("application/json")]
         [SwaggerOperation(
-            OperationId = nameof(GetRoleByIdAsync),
-            Summary = "Получить роль пользователя по ID.")]
-        public async Task<IActionResult> GetRoleByIdAsync(long id)
+            OperationId = nameof(GetAllStatusAsync),
+            Summary = "Получить словарь 'СТАТУС ПОЕЗДКИ'.")]
+        public async Task<IActionResult> GetAllStatusAsync()
         {
             try
             {
-                var result = await _userRequestService.GetRoleByIdAsync(id);
+                var result = await _dictionaryRequestService.GetAllStatusAsync();
                 return Ok(new { result = result });
             }
             catch (Exception ex)

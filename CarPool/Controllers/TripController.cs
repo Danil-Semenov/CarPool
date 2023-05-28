@@ -21,7 +21,7 @@ namespace CarPool.Controllers
             _tripRequestService = tripRequestService;
         }
 
-        [HttpPost("create")]
+        [HttpPost("add")]
         [Consumes("application/json")]
         [Produces("application/json")]
         [SwaggerOperation(
