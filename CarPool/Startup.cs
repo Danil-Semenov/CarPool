@@ -45,7 +45,6 @@ namespace CarPool
             services.AddScoped<IDictionaryRequestService, DictionaryRequestService>();
             services.AddScoped<IDayRequestService, DayRequestService>();
 
-
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CarPool", Version = "v1" });

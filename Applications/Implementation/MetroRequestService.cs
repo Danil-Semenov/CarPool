@@ -62,6 +62,8 @@ namespace Applications.Implementation
         public async Task<MetroDTO> GetMetroByNameAsync(string name)
         {
             var metro = await _context.Metro.AsNoTracking().FirstOrDefaultAsync(m => m.Name == name);
+
+
             if (metro != null)
             {
                 return await _mappers.GetMetro(metro);

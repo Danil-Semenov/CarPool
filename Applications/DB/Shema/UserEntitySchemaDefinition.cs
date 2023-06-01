@@ -24,19 +24,19 @@ namespace Applications.DB.Shema
             builder.Property(p => p.FirstName)
                 .HasColumnName("first_name")
                 .HasMaxLength(50)
-                .IsUnicode(false);
+                .IsUnicode(true);
             builder.Property(p => p.Phone)
                 .HasColumnName("phone")
                 .HasMaxLength(30)
-                .IsUnicode(false);
+                .IsUnicode(true);
             builder.Property(p => p.TgLink)
                 .HasColumnName("tg_link")
                 .HasMaxLength(30)
-                .IsUnicode(false);
+                .IsUnicode(true);
             builder.Property(p => p.Benefits)
                 .HasColumnName("benefits")
                 .HasMaxLength(30)
-                .IsUnicode(false);
+                .IsUnicode(true);
             builder.Property(p => p.Capacity)
                 .HasColumnName("capacity")
                 .HasColumnType("int");

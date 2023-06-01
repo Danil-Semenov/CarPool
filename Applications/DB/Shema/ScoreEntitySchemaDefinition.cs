@@ -20,7 +20,7 @@ namespace Applications.DB.Shema
             builder.Property(p => p.Name)
                 .HasColumnName("description")
                 .HasMaxLength(50)
-                .IsUnicode(false);
+                .IsUnicode(true);
             builder.Property(p => p.RoleId)
                 .HasColumnName("role_id")
                 .HasColumnType("int");

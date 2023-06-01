@@ -69,11 +69,11 @@ namespace CarPool.Controllers
         [SwaggerOperation(
             OperationId = nameof(FindTripsAsync),
             Summary = "Найти поездку.")]
-        public async Task<IActionResult> FindTripsAsync(TripDTO trip)
+        public async Task<IActionResult> FindTripsAsync(TripFilterDTO filer)
         {
             try
             {
-                var result = await _tripRequestService.FindTripsAsync(trip);
+                var result = await _tripRequestService.FindTripsAsync(filer);
                 return Ok(new { result = result });
             }
             catch (Exception ex)

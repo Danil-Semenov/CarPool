@@ -13,7 +13,7 @@ namespace Applications.Interface
 
         Task<IEnumerable<TripDTO>> GetTripsByUserIdAsync(long userId);
 
-        Task<IEnumerable<TripDTO>> FindTripsAsync(TripDTO trip);
+        Task<IEnumerable<TripDTO>> FindTripsAsync(TripFilterDTO filter);
 
         Task<bool> EditTripAsync(TripDTO trip, int id);
 

@@ -20,7 +20,7 @@ namespace Applications.DB.Shema
             builder.Property(p => p.Name)
                 .HasColumnName("destination")
                 .HasMaxLength(50)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             builder.HasKey(k => k.Id);
         }

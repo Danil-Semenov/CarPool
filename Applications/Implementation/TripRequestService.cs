@@ -31,25 +31,25 @@ namespace Applications.Implementation
             {
                 var days = await _context.Days.AsNoTracking().SingleOrDefaultAsync(u => u.Id == editProfile.Days);
                 var plase = days.Seats;
-                if (editProfile.Passengers1 > 0 && plase > 0)
+                if (editProfile.Passengers1 == null && plase > 0)
                 {
                     editProfile.Passengers1 = passengerId;
                     await _context.SaveChangesAsync();
                     return true;
                 }
-                if (editProfile.Passengers2 > 0 && plase > 1)
+                if (editProfile.Passengers2 == null && plase > 1)
                 {
                     editProfile.Passengers2 = passengerId;
                     await _context.SaveChangesAsync();
                     return true;
                 }
-                if (editProfile.Passengers3 > 0 && plase > 2)
+                if (editProfile.Passengers3 == null && plase > 2)
                 {
                     editProfile.Passengers3 = passengerId;
                     await _context.SaveChangesAsync();
                     return true;
                 }
-                if (editProfile.Passengers4 > 0 && plase > 3)
+                if (editProfile.Passengers4 == null && plase > 3)
                 {
                     editProfile.Passengers4 = passengerId;
                     await _context.SaveChangesAsync();
@@ -68,25 +68,25 @@ namespace Applications.Implementation
             {
                 if (editProfile.Passengers1 == passengerId)
                 {
-                    editProfile.Passengers1 = 0;
+                    editProfile.Passengers1 = null;
                     await _context.SaveChangesAsync();
                     return true;
                 }
                 if (editProfile.Passengers2 == passengerId)
                 {
-                    editProfile.Passengers2 = 0;
+                    editProfile.Passengers2 = null;
                     await _context.SaveChangesAsync();
                     return true;
                 }
                 if (editProfile.Passengers3 == passengerId)
                 {
-                    editProfile.Passengers3 = 0;
+                    editProfile.Passengers3 = null;
                     await _context.SaveChangesAsync();
                     return true;
                 }
                 if (editProfile.Passengers4 == passengerId)
                 {
-                    editProfile.Passengers4 = 0;
+                    editProfile.Passengers4 = null;
                     await _context.SaveChangesAsync();
                     return true;
                 }
@@ -156,9 +156,33 @@ namespace Applications.Implementation
             return false;
         }
 
-        public async Task<IEnumerable<TripDTO>> FindTripsAsync(TripDTO trip)
+        public async Task<IEnumerable<TripDTO>> FindTripsAsync(TripFilterDTO filer)
         {
-            throw new NotImplementedException();
+            var result = _context.Trips.AsNoTracking().Where(t=>t.Status == 1);
+            if (filer.Destination != null)
+            {
+                result = result.Where(t => t.Destination == filer.Destination);
+            }
+            if (filer.Metro != null)
+            {
+                result = result.Where(t => t.Metro == filer.Metro);
+            }
+            if (filer.DateTrip != null)
+            {
+                var day = _context.Days.AsNoTracking().Where(d => d.Days.Value.Date == filer.DateTrip.Value.Date).Select(t=>t.Id).ToList();
+                result = result.Where(t => day.Contains((int)t.Days));
+            }
+
+            if (result != null)
+            {
+                var tripsDTO = new List<TripDTO>();
+                foreach (var trip in result)
+                {
+                    tripsDTO.Add(await _mappers.GetTrip(trip));
+                }
+                return tripsDTO;
+            }
+            return null;
         }
 
         public async Task<IEnumerable<TripDTO>> GetTripsByUserIdAsync(long userId)

@@ -1,6 +1,8 @@
 ﻿using Applications.DB.Entities;
 using Applications.DB.Shema;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
 using System;
 using System.Collections.Generic;
 using System.Linq;
