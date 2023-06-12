@@ -83,11 +83,11 @@ namespace CarPool.Controllers
         [SwaggerOperation(
             OperationId = nameof(AddMetroByUserIdAsync),
             Summary = "Добавить метро пользователю.")]
-        public async Task<IActionResult> AddMetroByUserIdAsync(long userid, int metroId)
+        public async Task<IActionResult> AddMetroByUserIdAsync(long id, int metroId)
         {
             try
             {
-                var result = await _userRequestService.AddMetroByUserIdAsync(userid, metroId);
+                var result = await _userRequestService.AddMetroByUserIdAsync(id, metroId);
                 return Ok(new { result = result });
             }
             catch (Exception ex)
@@ -102,11 +102,11 @@ namespace CarPool.Controllers
         [SwaggerOperation(
            OperationId = nameof(DeleteMetroByUserIdAsync),
            Summary = "Удалить метро у пользователя.")]
-        public async Task<IActionResult> DeleteMetroByUserIdAsync(long userid, int metroId)
+        public async Task<IActionResult> DeleteMetroByUserIdAsync(long id, int metroId)
         {
             try
             {
-                var result = await _userRequestService.DeleteMetroByUserIdAsync(userid, metroId);
+                var result = await _userRequestService.DeleteMetroByUserIdAsync(id, metroId);
                 return Ok(new { result = result });
             }
             catch (Exception ex)
