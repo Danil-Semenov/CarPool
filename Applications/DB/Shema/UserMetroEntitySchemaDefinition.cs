@@ -23,7 +23,7 @@ namespace Applications.DB.Shema
               .HasColumnName("metro_id")
               .HasColumnType("int");
 
-            builder.HasNoKey();
+            builder.HasKey(c => new {c.UserId,c.MetroId});
         }
     }
 }
