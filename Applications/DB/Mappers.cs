@@ -174,9 +174,10 @@ namespace Applications.DB
                 FirstName = user.FirstName,
                 Phone = user.Phone,
                 TgLink = user.TgLink,
+                Bonus = user.Bonus,
                 Benefits = user.Benefits,
                 Capacity = user.Capacity,
-                RegistrationDate = user.RegistrationDate,
+                RegistrationDate = user.RegistrationDate
             };
 
             var role = await _context.Roles.AsNoTracking().SingleOrDefaultAsync(r => r.Id == user.RoleId);
@@ -185,11 +186,15 @@ namespace Applications.DB
                 result.Role = await GetRole(role);
             }
 
-            var metro = await _context.Metro.AsNoTracking().SingleOrDefaultAsync(r => r.Id == user.MetroId);
-            if (metro != null)
+            var metros = _context.UserMetro.AsNoTracking().Where(r => r.UserId == user.Id);
+
+            var metro = _context.Metro.AsNoTracking().Where(r => metros.Select(m=>m.MetroId).Contains(r.Id));
+            var metroList = new List<MetroDTO>();
+            foreach (var m in metro)
             {
-                result.Metro = await GetMetro(metro);
+                metroList.Add(await GetMetro(m));
             }
+            result.Metros = metroList;
             return result;
         }
     }

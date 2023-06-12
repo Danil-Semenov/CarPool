@@ -22,6 +22,7 @@ namespace Applications.DB
         public DbSet<Score> Scores { get; set; }
         public DbSet<Status> Status { get; set; }
         public DbSet<Trip> Trips { get; set; }
+        public DbSet<UserMetro> UserMetro { get; set; }
 
 
         public CarPollDbContext(DbContextOptions<CarPollDbContext> options) : base(options) { }
@@ -39,6 +40,7 @@ namespace Applications.DB
             modelBuilder.ApplyConfiguration(new ScoreEntitySchemaDefinition());
             modelBuilder.ApplyConfiguration(new StatusEntitySchemaDefinition());
             modelBuilder.ApplyConfiguration(new TripEntitySchemaDefinition());
+            modelBuilder.ApplyConfiguration(new UserMetroEntitySchemaDefinition());
             base.OnModelCreating(modelBuilder);
         }
     }

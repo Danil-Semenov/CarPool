@@ -19,12 +19,12 @@ namespace Applications.DB.Entities
 
         public string? TgLink { get; set; }
 
+        public int? Bonus { get; set; }
+
         public string? Benefits { get; set; }
 
         public int? Capacity { get; set; }
 
         public DateTime? RegistrationDate { get; set; }
-
-        public int? MetroId { get; set; }
     }
 }

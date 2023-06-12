@@ -76,5 +76,43 @@ namespace CarPool.Controllers
                 return BadRequest(new { status = 400, error = ex.Message });
             }
         }
+
+        [HttpGet("{id}/addmetro")]
+        [Consumes("application/json")]
+        [Produces("application/json")]
+        [SwaggerOperation(
+            OperationId = nameof(AddMetroByUserIdAsync),
+            Summary = "Добавить метро пользователю.")]
+        public async Task<IActionResult> AddMetroByUserIdAsync(long userid, int metroId)
+        {
+            try
+            {
+                var result = await _userRequestService.AddMetroByUserIdAsync(userid, metroId);
+                return Ok(new { result = result });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { status = 400, error = ex.Message });
+            }
+        }
+
+        [HttpGet("{id}/deletemetro")]
+        [Consumes("application/json")]
+        [Produces("application/json")]
+        [SwaggerOperation(
+           OperationId = nameof(DeleteMetroByUserIdAsync),
+           Summary = "Удалить метро у пользователя.")]
+        public async Task<IActionResult> DeleteMetroByUserIdAsync(long userid, int metroId)
+        {
+            try
+            {
+                var result = await _userRequestService.DeleteMetroByUserIdAsync(userid, metroId);
+                return Ok(new { result = result });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { status = 400, error = ex.Message });
+            }
+        }
     }
 }

@@ -13,6 +13,10 @@ namespace Applications.Interface
 
         Task<bool> EditProfileAsync(UserDTO profile, long id);
 
+        Task<bool> AddMetroByUserIdAsync(long userid,int metroId);
+
+        Task<bool> DeleteMetroByUserIdAsync(long userid, int metroId);
+
         Task<RoleDTO> GetRoleByIdAsync(long id);
 
         Task<UserDTO> GetFirstAsync();

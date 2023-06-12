@@ -18,12 +18,14 @@ namespace Applications.DTOs
 
         public string TgLink { get; set; }
 
+        public int? Bonus { get; set; }
+
         public string Benefits { get; set; }
 
         public int? Capacity { get; set; }
 
         public DateTime? RegistrationDate { get; set; }
 
-        public MetroDTO Metro { get; set; }
+        public IEnumerable<MetroDTO> Metros { get; set; }
     }
 }

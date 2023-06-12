@@ -37,15 +37,15 @@ namespace Applications.DB.Shema
                 .HasColumnName("benefits")
                 .HasMaxLength(30)
                 .IsUnicode(true);
+            builder.Property(p => p.Bonus)
+               .HasColumnName("bonus")
+               .HasColumnType("int");
             builder.Property(p => p.Capacity)
                 .HasColumnName("capacity")
                 .HasColumnType("int");
             builder.Property(p => p.RegistrationDate)
                 .HasColumnName("registration_date")
                 .HasColumnType("DateTime");
-            builder.Property(p => p.MetroId)
-              .HasColumnName("metro_id")
-              .HasColumnType("int");
 
             builder.HasKey(k => k.Id);
         }

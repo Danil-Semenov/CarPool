@@ -104,6 +104,19 @@ namespace Applications.Implementation
             if (editProfile != null && user != null)
             {
                 editProfile.Status = user.RoleId.Value == 1 ? 3:4;
+                var users = _context.Users.AsNoTracking().Where(u => u.Id == editProfile.Driver || u.Id == editProfile.Passengers1 || u.Id == editProfile.Passengers2 || u.Id == editProfile.Passengers3 || u.Id == editProfile.Passengers4 );
+                foreach(var us in users)
+                {
+                    _context.Users.Update(us);
+                    if (us.RoleId.Value == 1)
+                    {
+                        us.Bonus += 5;
+                    }
+                    else
+                    {
+                        us.Bonus += 1;
+                    }
+                }
                 await _context.SaveChangesAsync();
                 return true;
             }
@@ -119,19 +132,19 @@ namespace Applications.Implementation
                 //TripDate = trip.TripDate,
                 Status = trip.Status.Id,
                 Destination = trip.Destination.Id,
-                //Metro = trip.Metro.Id,
+                Metro = trip.Metro.Id,
                 Days =  trip.Day.Id,
             };
 
             var user = await _context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Id == trip.Driver.Id);
-            if(user != null && user.MetroId >0)
-            {
-                newProfile.Metro = user.MetroId;
-            }
-            else
-            {
-                new ArgumentException("Driver.Metro");
-            }
+            //if(user != null && user.MetroId >0)
+            //{
+            //    newProfile.Metro = user.MetroId;
+            //}
+            //else
+            //{
+            //    new ArgumentException("Driver.Metro");
+            //}
             _context.Trips.Add(newProfile);
             await _context.SaveChangesAsync();
             return newProfile.Id;

@@ -33,10 +33,17 @@ namespace Applications.Implementation
                 Benefits = user.Benefits,
                 Capacity = user.Capacity,
                 RegistrationDate = user.RegistrationDate,
-                RoleId = user.Role.Id,
-                MetroId = user.Metro.Id
+                RoleId = user.Role.Id
             };
             _context.Users.Add(newProfile);
+            foreach (var item in user.Metros)
+            {
+                _context.UserMetro.Add(new UserMetro()
+                {
+                    UserId = user.Id,
+                    MetroId = item.Id
+                });
+            }
             await _context.SaveChangesAsync();
             return newProfile.Id;
         }
@@ -57,8 +64,8 @@ namespace Applications.Implementation
                 editProfile.Capacity = user.Capacity;
             if (user.Role?.Id > 0)
                 editProfile.RoleId = user.Role.Id;
-            if (user.Metro?.Id > 0)
-                editProfile.MetroId = user.Metro.Id;
+            //if (user.Metro?.Id > 0)
+            //    editProfile.MetroId = user.Metro.Id;
             //_context.Users.Update(editProfile);
             await _context.SaveChangesAsync();
             return true;
@@ -76,6 +83,25 @@ namespace Applications.Implementation
             var profile = await _context.Users.AsNoTracking().FirstOrDefaultAsync(u=> u.Id >0);
             var user = await _mappers.GetUser(profile);
             return user;
+        }
+
+        public async Task<bool> AddMetroByUserIdAsync(long userid, int metroId)
+        {
+            _context.UserMetro.Add(new UserMetro()
+            {
+                UserId = userid,
+                MetroId = metroId
+            });
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<bool> DeleteMetroByUserIdAsync(long userid, int metroId)
+        {
+            var profile = await _context.UserMetro.AsNoTracking().FirstOrDefaultAsync(u => u.UserId == userid || u.MetroId == metroId);
+            _context.UserMetro.Remove(profile);
+            await _context.SaveChangesAsync();
+            return true;
         }
     }
 }
