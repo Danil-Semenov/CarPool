@@ -98,7 +98,7 @@ namespace Applications.Implementation
 
         public async Task<bool> DeleteMetroByUserIdAsync(long userid, int metroId)
         {
-            var profile = await _context.UserMetro.AsNoTracking().FirstOrDefaultAsync(u => u.UserId == userid || u.MetroId == metroId);
+            var profile = await _context.UserMetro.AsNoTracking().FirstOrDefaultAsync(u => u.UserId == userid && u.MetroId == metroId);
             _context.UserMetro.Remove(profile);
             await _context.SaveChangesAsync();
             return true;
