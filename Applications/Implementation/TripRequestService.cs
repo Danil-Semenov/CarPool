@@ -129,7 +129,7 @@ namespace Applications.Implementation
             {
                 Driver = trip.Driver.Id,
                 //Passengers = trip.Passengers.First().Id,
-                //TripDate = trip.TripDate,
+                TripDate = trip.TripDate,
                 Status = trip.Status.Id,
                 Destination = trip.Destination.Id,
                 Metro = trip.Metro.Id,

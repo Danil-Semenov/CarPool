@@ -25,7 +25,8 @@ namespace Applications.DB
             var result = new DayDTO()
             {
                 Id = day.Id,
-                Seats = day.Seats
+                Seats = day.Seats,
+                Days = (DateTime)day.Days
             };
 
             var user = await _context.Users.AsNoTracking().SingleOrDefaultAsync(r => r.Id == day.UserId);
