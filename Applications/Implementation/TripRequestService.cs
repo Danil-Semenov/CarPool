@@ -104,17 +104,20 @@ namespace Applications.Implementation
             if (editProfile != null && user != null)
             {
                 editProfile.Status = user.RoleId.Value == 1 ? 3:4;
-                var users = _context.Users.AsNoTracking().Where(u => u.Id == editProfile.Driver || u.Id == editProfile.Passengers1 || u.Id == editProfile.Passengers2 || u.Id == editProfile.Passengers3 || u.Id == editProfile.Passengers4 );
-                foreach(var us in users)
+                if (user.RoleId.Value == 2)
                 {
-                    _context.Users.Update(us);
-                    if (us.RoleId.Value == 1)
+                    var users = _context.Users.AsNoTracking().Where(u => u.Id == editProfile.Driver || u.Id == editProfile.Passengers1 || u.Id == editProfile.Passengers2 || u.Id == editProfile.Passengers3 || u.Id == editProfile.Passengers4);
+                    foreach (var us in users)
                     {
-                        us.Bonus += 5;
-                    }
-                    else
-                    {
-                        us.Bonus += 1;
+                        _context.Users.Update(us);
+                        if (us.RoleId.Value == 1)
+                        {
+                            us.Bonus += 5;
+                        }
+                        else
+                        {
+                            us.Bonus += 1;
+                        }
                     }
                 }
                 await _context.SaveChangesAsync();

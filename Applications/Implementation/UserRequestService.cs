@@ -33,7 +33,8 @@ namespace Applications.Implementation
                 Benefits = user.Benefits,
                 Capacity = user.Capacity,
                 RegistrationDate = user.RegistrationDate,
-                RoleId = user.Role.Id
+                RoleId = user.Role.Id,
+                Bonus = user.Bonus
             };
             _context.Users.Add(newProfile);
             foreach (var item in user.Metros)
